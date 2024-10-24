@@ -18,6 +18,10 @@ public class SeriesService {
         return convertsData(seriesRepository.findAll());
     }
 
+    public List<SeriesDTO> getTop5Series() {
+        return convertsData(seriesRepository.findTop5ByOrderByRatingDesc());
+    }
+
     private List<SeriesDTO> convertsData(List<Series> series) {
         return series.stream()
                 .map(s -> new SeriesDTO(
