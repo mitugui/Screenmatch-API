@@ -1,6 +1,7 @@
 package br.com.alura.screenmatch.services;
 
 import br.com.alura.screenmatch.dto.SeriesDTO;
+import br.com.alura.screenmatch.models.Series;
 import br.com.alura.screenmatch.repository.SeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,13 @@ public class SeriesService {
     private SeriesRepository seriesRepository;
 
     public List<SeriesDTO> getAllSeries() {
-        return seriesRepository.findAll().stream()
-                .map(s -> new SeriesDTO(s.getId(),
+        return convertsData(seriesRepository.findAll());
+    }
+
+    private List<SeriesDTO> convertsData(List<Series> series) {
+        return series.stream()
+                .map(s -> new SeriesDTO(
+                        s.getId(),
                         s.getTitle(),
                         s.getTotalSeasons(),
                         s.getRating(),
