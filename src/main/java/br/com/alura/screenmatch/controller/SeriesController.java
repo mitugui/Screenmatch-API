@@ -22,6 +22,11 @@ public class SeriesController {
         return service.getAllSeries();
     }
 
+    @GetMapping("/categoria/{genre}")
+    public List<SeriesDTO> getSeriesByGenre(@PathVariable String genre) {
+        return service.getSeriesByGenre(genre);
+    }
+
     @GetMapping("/top5")
     public List<SeriesDTO> getTop5Series() {
         return service.getTop5Series();

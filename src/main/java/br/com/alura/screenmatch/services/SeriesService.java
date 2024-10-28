@@ -2,6 +2,7 @@ package br.com.alura.screenmatch.services;
 
 import br.com.alura.screenmatch.dto.EpisodeDTO;
 import br.com.alura.screenmatch.dto.SeriesDTO;
+import br.com.alura.screenmatch.models.Category;
 import br.com.alura.screenmatch.models.Episode;
 import br.com.alura.screenmatch.models.Series;
 import br.com.alura.screenmatch.repository.SeriesRepository;
@@ -19,6 +20,11 @@ public class SeriesService {
 
     public List<SeriesDTO> getAllSeries() {
         return convertSeriesListToDTOs(seriesRepository.findAll());
+    }
+
+    public List<SeriesDTO> getSeriesByGenre(String genreName) {
+        Category genre = Category.fromPortuguese(genreName);
+        return convertSeriesListToDTOs(seriesRepository.findByGenre(genre));
     }
 
     public List<SeriesDTO> getTop5Series() {
