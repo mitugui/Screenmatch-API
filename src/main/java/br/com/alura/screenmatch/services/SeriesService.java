@@ -67,6 +67,10 @@ public class SeriesService {
         return convertEpisodeListToDTOs(seriesRepository.findEpisodesBySeason(id, number));
     }
 
+    public List<EpisodeDTO> getTop5Episodes(Long id) {
+        return convertEpisodeListToDTOs(seriesRepository.findTop5EpisodesByRating(id));
+    }
+
     private List<SeriesDTO> convertSeriesListToDTOs(List<Series> series) {
         return series.stream()
                 .map(s -> new SeriesDTO(
@@ -86,7 +90,8 @@ public class SeriesService {
                 .map(e -> new EpisodeDTO(
                         e.getSeason(),
                         e.getEpisodeNumber(),
-                        e.getTitle()))
+                        e.getTitle(),
+                        e.getRating()))
                 .collect(Collectors.toList());
     }
 }
