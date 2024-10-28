@@ -17,15 +17,15 @@ public class SeriesService {
     private SeriesRepository seriesRepository;
 
     public List<SeriesDTO> getAllSeries() {
-        return convertsData(seriesRepository.findAll());
+        return convertSeriesListToDTOs(seriesRepository.findAll());
     }
 
     public List<SeriesDTO> getTop5Series() {
-        return convertsData(seriesRepository.findTop5ByOrderByRatingDesc());
+        return convertSeriesListToDTOs(seriesRepository.findTop5ByOrderByRatingDesc());
     }
 
     public List<SeriesDTO> getReleases() {
-        return convertsData(seriesRepository.findTop5MostRecentSeries());
+        return convertSeriesListToDTOs(seriesRepository.findTop5MostRecentSeries());
     }
 
     public SeriesDTO getById(Long id) {
@@ -58,7 +58,7 @@ public class SeriesService {
         return null;
     }
 
-    private List<SeriesDTO> convertsData(List<Series> series) {
+    private List<SeriesDTO> convertSeriesListToDTOs(List<Series> series) {
         return series.stream()
                 .map(s -> new SeriesDTO(
                         s.getId(),
